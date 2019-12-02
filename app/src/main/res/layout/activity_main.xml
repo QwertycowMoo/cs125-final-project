@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="CS125 WarioWare"
+            android:text="@string/game_title_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textColor="#12264C"
             android:textSize="36sp"
@@ -34,6 +34,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="CS125 Logo"
             tools:srcCompat="@mipmap/cs_125_logo_foreground" />
 
         <LinearLayout
@@ -76,10 +77,7 @@
                 android:layout_margin="20dp"
                 android:background="#673AB7"
                 android:gravity="center"
-                android:paddingLeft="40dp"
-                android:paddingTop="10dp"
-                android:paddingRight="40dp"
-                android:paddingBottom="10dp"
+                android:padding="10dp"
                 android:text="@string/credits_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="30sp"
