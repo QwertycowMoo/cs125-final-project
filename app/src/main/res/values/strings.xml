@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">cs125-final-project</string>
+    <string name="game_title_label">CS125 WarioWare</string>
+    <string name="arcade_mode_label">Arcade Mode</string>
+    <string name="trophy_room_label">Trophy Room</string>
+    <string name="credits_label">Credits</string>
 </resources>
