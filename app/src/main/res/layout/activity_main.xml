@@ -53,7 +53,7 @@
                 android:padding="10dp"
                 android:text="@string/arcade_mode_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="18sp"
+                android:textSize="30sp"
                 android:typeface="monospace" />
 
             <Button
@@ -66,7 +66,7 @@
                 android:padding="10dp"
                 android:text="@string/trophy_room_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="18sp"
+                android:textSize="30sp"
                 android:typeface="monospace" />
 
             <Button
@@ -76,11 +76,13 @@
                 android:layout_margin="20dp"
                 android:background="#673AB7"
                 android:gravity="center"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
+                android:paddingLeft="40dp"
+                android:paddingTop="10dp"
+                android:paddingRight="40dp"
+                android:paddingBottom="10dp"
                 android:text="@string/credits_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="18sp"
+                android:textSize="30sp"
                 android:typeface="monospace" />
         </LinearLayout>
 
