@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/trophy_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trophies" />
+
+        <LinearLayout
+            android:id="@+id/trophy_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="423dp"
+                android:layout_height="199dp"
+                app:srcCompat="@drawable/backButton" />
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="back"
+                tools:text="back" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/trophy_background"
+            android:layout_width="match_parent"
+            android:layout_height="720dp"
+            android:background="@drawable/shelf"
+            app:srcCompat="@drawable/shelf" />
+
+    </LinearLayout>
+</LinearLayout>
