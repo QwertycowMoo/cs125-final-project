@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class TrophyActivity extends AppCompatActivity {
 
@@ -11,7 +12,7 @@ public class TrophyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trophy);
-        Button trophy_back = findViewById(R.id.btnBack);
+        ImageView trophy_back = findViewById(R.id.button_back);
         trophy_back.setOnClickListener(v -> {
             finish();
         });
