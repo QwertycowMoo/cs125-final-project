@@ -26,7 +26,6 @@
                 android:id="@+id/imageButton"
                 android:layout_width="423dp"
                 android:layout_height="199dp"
-                app:srcCompat="@drawable/back_button" />
 
             <Button
                 android:id="@+id/back"
