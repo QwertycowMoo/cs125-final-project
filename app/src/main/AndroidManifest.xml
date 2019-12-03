@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".GameActivity"></activity>
-        <activity android:name=".TrophyActivity" />
+        <activity android:name=".TrophyActivity"></activity>
         <activity android:name=".CreditsActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
