@@ -8,6 +8,7 @@
     android:background="@color/black">
 
     <LinearLayout
+        android:id="@+id/layGameContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -16,7 +17,8 @@
             android:id="@+id/layCoinsAndTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/txtCoins"
@@ -32,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Time Left: 5"
+                android:text="Timer"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp" />
 
@@ -56,6 +58,26 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layPassFail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtPassFail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="250dp"
+                android:gravity="center"
+                android:text="Pass Or Fail?"
+                android:textColor="#FF0000"
+                android:textSize="75sp"
+                android:visibility="visible"
+                app:fontFamily="sans-serif-smallcaps" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/layQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,13 +94,88 @@
             android:id="@+id/layPushMP"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical"
+            android:visibility="gone"></LinearLayout>
 
         <LinearLayout
             android:id="@+id/layChangeSlides"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtGeoffSlides"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Geoff's Slides"
+                android:textColor="#FAFAFA"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/imgGeoffSlide"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                tools:srcCompat="@tools:sample/avatars[3]" />
+
+            <TextView
+                android:id="@+id/txtYourSlides"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="Your Slides"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/imgYourSlide"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="10dp"
+                tools:srcCompat="@tools:sample/avatars[3]" />
+
+            <LinearLayout
+                android:id="@+id/laySwitchButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnPrevSlide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:background="@color/bottomGradient"
+                    android:text="Prev"
+                    android:textColor="@color/topGradient"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnNextSlide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:background="@color/topGradient"
+                    android:text="Next"
+                    android:textColor="@color/bottomGradient"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtChangeSlidesInstr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Change the slides so they match Geoff's "
+                android:textColor="#F3EFEF"
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -86,7 +183,8 @@
             android:id="@+id/layClickCSLogo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
         </LinearLayout>
 
@@ -94,13 +192,15 @@
             android:id="@+id/layBalanceLogo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical"
+            android:visibility="gone"></LinearLayout>
 
         <LinearLayout
             android:id="@+id/laySmashBugs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical"
+            android:visibility="gone"></LinearLayout>
 
     </LinearLayout>
 

@@ -12,6 +12,7 @@
         <activity android:name=".GameActivity"></activity>
         <activity android:name=".TrophyActivity"></activity>
         <activity android:name=".CreditsActivity"/>
+        <activity android:name=".SlideChangeGame"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
