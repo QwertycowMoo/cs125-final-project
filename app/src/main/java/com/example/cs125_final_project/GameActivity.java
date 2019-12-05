@@ -64,6 +64,9 @@ public class GameActivity extends AppCompatActivity {
         coins = 0;
 
         difficulty = EASY;
+        layPassFail.setVisibility(View.VISIBLE);
+        txtPassFail.setTextColor(getResources().getColor(R.color.topGradient));
+        txtPassFail.setText("Ready?");
         CountDownTimer timer = new CountDownTimer(passFailTimerMillisLeft, 1000) {
             @Override
             public void onTick(long l) {
@@ -83,7 +86,6 @@ public class GameActivity extends AppCompatActivity {
 
             }
         }.start();
-        startNewMiniGame();
     }
 
     /**
@@ -136,9 +138,8 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private int updateCoins() {
+    private void updateCoins() {
         txtCoins.setText(String.format(Locale.getDefault(),"Challen Coins: %d", coins));
-        return coins;
     }
 
     private void startNewMiniGame() {
