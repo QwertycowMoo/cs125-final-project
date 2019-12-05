@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         TextView coinText = findViewById(R.id.txtMainCoins);
         switch(coins) {
             case 1:
-                coinText.setText(coins + " Challen Coin ");
+                coinText.setText(coins + " Challen Coin");
             default:
                 coinText.setText(coins + " Challen Coins");
         }
