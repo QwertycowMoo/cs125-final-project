@@ -113,12 +113,18 @@ public class SlideChangeGame extends AppCompatActivity {
             if (currentSlide < slideImages.length - 1) {
                 currentSlide += 1;
                 imgYours.setImageResource(slideImages[currentSlide]);
+            } else {
+                currentSlide = 0;
+                imgYours.setImageResource(slideImages[currentSlide]);
             }
         });
 
         btnPrev.setOnClickListener(v -> {
             if (currentSlide > 0 ) {
                 currentSlide -= 1;
+                imgYours.setImageResource(slideImages[currentSlide]);
+            } else {
+                currentSlide = slideImages.length - 1;
                 imgYours.setImageResource(slideImages[currentSlide]);
             }
         });
