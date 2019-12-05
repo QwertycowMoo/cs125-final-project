@@ -12,8 +12,10 @@ import android.os.CountDownTimer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
-public class SlideChangeGame extends AppCompatActivity implements Game {
+public class SlideChangeGame extends AppCompatActivity {
     /**Array of all the slide images used to change/match */
     private int[] slideImages;
     /**Geoff's slide, the one to match: an index*/
@@ -25,10 +27,13 @@ public class SlideChangeGame extends AppCompatActivity implements Game {
     /**Number of seconds for the timer*/
     private long timeMillisLeft;
     /**They're global because it works that way*/
-    LinearLayout layChangeSlides;
-    ImageView imgYours;
-    ImageView imgGeoff;
-    TextView txtTimer;
+    private LinearLayout layChangeSlides;
+    private ImageView imgYours;
+    private ImageView imgGeoff;
+    private TextView txtTimer;
+
+    /**for the lives*/
+    public final static int HEART_RED_UNICODE = 0x2764;
 
     public static final int SLIDE_CHANGE_GAME_RES_CODE = 0;
 
@@ -48,7 +53,7 @@ public class SlideChangeGame extends AppCompatActivity implements Game {
         Random r = new Random();
         geoffSlide = r.nextInt(slideImages.length);
         System.out.println("initializing geoffSlide to: " + geoffSlide);
-        int currentSlide = geoffSlide;
+        currentSlide = geoffSlide;
         while (currentSlide == geoffSlide) {
             currentSlide = r.nextInt(slideImages.length);
         }
@@ -62,6 +67,25 @@ public class SlideChangeGame extends AppCompatActivity implements Game {
         //Timer Setup
         txtTimer = findViewById(R.id.txtTimer);
         timeMillisLeft = 6000;
+
+        //Updating coins and lives has to happen through intent or else it just breaks
+        Intent intent = getIntent();
+        int coins = intent.getIntExtra("coins", -1);
+        int lives = intent.getIntExtra("lives", -1);
+        TextView txtCoins = findViewById(R.id.txtCoins);
+        txtCoins.setText("Challen Coins: " + coins);
+        TextView txtLives = findViewById(R.id.txtLives);
+        String hearts = "";
+        for (int i = 0; i < lives; i++) {
+            hearts += new String(Character.toChars(HEART_RED_UNICODE));
+        }
+        txtLives.setText(hearts);
+
+
+
+        //Update Game Title
+        TextView txtGameTitle = findViewById(R.id.txtGameTitle);
+        txtGameTitle.setText("Match the Slide!");
         playGame();
 
     }

@@ -55,6 +55,15 @@
                 android:textAllCaps="false"
                 android:textColor="#EB9E9E"
                 android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/txtLives"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Lives"
+                android:textColor="#DA2323"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -81,7 +90,8 @@
             android:id="@+id/layQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/txtQuestion"
@@ -109,6 +119,7 @@
                 android:id="@+id/txtGeoffSlides"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="Geoff's Slides"
@@ -118,7 +129,7 @@
             <ImageView
                 android:id="@+id/imgGeoffSlide"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="160dp"
                 tools:srcCompat="@tools:sample/avatars[3]" />
 
             <TextView
@@ -134,15 +145,14 @@
             <ImageView
                 android:id="@+id/imgYourSlide"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="10dp"
+                android:layout_height="160dp"
                 tools:srcCompat="@tools:sample/avatars[3]" />
 
             <LinearLayout
                 android:id="@+id/laySwitchButtons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -167,15 +177,6 @@
                     android:textColor="@color/bottomGradient"
                     android:textSize="18sp" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/txtChangeSlidesInstr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Change the slides so they match Geoff's "
-                android:textColor="#F3EFEF"
-                android:textSize="18sp" />
 
         </LinearLayout>
 
