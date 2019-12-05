@@ -23,8 +23,6 @@ public class GameActivity extends AppCompatActivity {
     private TextView txtPassFail;
     /**layout containting the pass fail message */
     private LinearLayout layPassFail;
-    /**difficulty determines time/may get set to the minigame through an intent to change the game */
-    private int difficulty;
 
     /**lives*/
     private int lives;
@@ -33,11 +31,6 @@ public class GameActivity extends AppCompatActivity {
 
     /**coins*/
     private int coins;
-
-    public final static int EASY = 1;
-    public final static int MEDIUM = 2;
-    public final static int HARD = 3;
-    public final static int MP2 = 4;
     public final static int SLIDE_CHANGE_GAME_REQ_CODE = 0;
     /**colors*/
     public final static int COLOR_GREEN = 0xff00ff00;
@@ -59,11 +52,13 @@ public class GameActivity extends AppCompatActivity {
         txtLives = findViewById(R.id.txtLives);
 
         //Set up lives and coins
-        lives = 2;
+        lives = 3;
         updateLives();
         coins = 0;
 
-        difficulty = EASY;
+        layPassFail.setVisibility(View.VISIBLE);
+        txtPassFail.setTextColor(getResources().getColor(R.color.topGradient));
+        txtPassFail.setText("Ready?");
         CountDownTimer timer = new CountDownTimer(passFailTimerMillisLeft, 1000) {
             @Override
             public void onTick(long l) {
@@ -83,7 +78,6 @@ public class GameActivity extends AppCompatActivity {
 
             }
         }.start();
-        //startNewMiniGame();
     }
 
     /**
@@ -99,7 +93,7 @@ public class GameActivity extends AppCompatActivity {
             // Do something that depends on the result of that request
             boolean success = data.getBooleanExtra("success", false);
             if (success) {
-                coins += 1 * difficulty;
+                coins += 1;
                 txtPassFail.setTextColor(COLOR_GREEN);
                 txtPassFail.setText("Pass :)");
             } else {
@@ -136,13 +130,9 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void updateCoins() {
-        switch(coins) {
-            case 1:
-                txtCoins.setText(coins + " Challen Coin");
-            default:
-                txtCoins.setText(coins + " Challen Coins");
-        }
+    private int updateCoins() {
+        txtCoins.setText(String.format(Locale.getDefault(),"Coins Earned: %d", coins));
+        return coins;
     }
 
     private void startNewMiniGame() {
