@@ -182,10 +182,26 @@
         <LinearLayout
             android:id="@+id/layClickCSLogo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
+            <ImageView
+                android:id="@+id/imgLogoClick"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_gravity="center|center_vertical"
+                app:srcCompat="@mipmap/cs_125_logo_foreground" />
+
+            <TextView
+                android:id="@+id/txtLogoClickCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Clicked: 0"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
         </LinearLayout>
 
         <LinearLayout
