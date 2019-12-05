@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Challen Coins: 0"
+                android:text="Coins Earned: 0"
                 android:textColor="#ECB148"
                 android:textSize="24sp" />
 
@@ -51,7 +51,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Game Title"
                 android:textAllCaps="false"
                 android:textColor="#EB9E9E"
                 android:textSize="30sp" />

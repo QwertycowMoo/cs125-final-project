@@ -83,7 +83,7 @@ public class GameActivity extends AppCompatActivity {
 
             }
         }.start();
-        startNewMiniGame();
+        //startNewMiniGame();
     }
 
     /**
@@ -99,7 +99,7 @@ public class GameActivity extends AppCompatActivity {
             // Do something that depends on the result of that request
             boolean success = data.getBooleanExtra("success", false);
             if (success) {
-                coins += 10 * difficulty;
+                coins += 1 * difficulty;
                 txtPassFail.setTextColor(COLOR_GREEN);
                 txtPassFail.setText("Pass :)");
             } else {
@@ -136,9 +136,13 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private int updateCoins() {
-        txtCoins.setText(String.format(Locale.getDefault(),"Challen Coins: %d", coins));
-        return coins;
+    private void updateCoins() {
+        switch(coins) {
+            case 1:
+                txtCoins.setText(coins + " Challen Coin");
+            default:
+                txtCoins.setText(coins + " Challen Coins");
+        }
     }
 
     private void startNewMiniGame() {

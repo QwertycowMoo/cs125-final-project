@@ -73,7 +73,7 @@ public class SlideChangeGame extends AppCompatActivity {
         int coins = intent.getIntExtra("coins", -1);
         int lives = intent.getIntExtra("lives", -1);
         TextView txtCoins = findViewById(R.id.txtCoins);
-        txtCoins.setText(0 + " Challen Coins");
+        txtCoins.setText("Coins Earned: " + coins);
         TextView txtLives = findViewById(R.id.txtLives);
         String hearts = "";
         for (int i = 0; i < lives; i++) {
