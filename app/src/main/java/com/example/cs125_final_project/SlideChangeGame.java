@@ -32,10 +32,7 @@ public class SlideChangeGame extends AppCompatActivity {
     private ImageView imgGeoff;
     private TextView txtTimer;
 
-    /**for the lives*/
-    public final static int HEART_RED_UNICODE = 0x2764;
-
-    public static final int SLIDE_CHANGE_GAME_RES_CODE = 0;
+    public static final int SLIDE_CHANGE_GAME_END_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +63,16 @@ public class SlideChangeGame extends AppCompatActivity {
         layChangeSlides.setVisibility(View.VISIBLE);
         //Timer Setup
         txtTimer = findViewById(R.id.txtTimer);
-        timeMillisLeft = 6000;
+        timeMillisLeft = 10000;
 
         //Updating coins and lives has to happen through intent or else it just breaks
         Intent intent = getIntent();
         int coins = intent.getIntExtra("coins", -1);
         int lives = intent.getIntExtra("lives", -1);
         TextView txtCoins = findViewById(R.id.txtCoins);
-        txtCoins.setText("Coins Earned: " + coins);
         TextView txtLives = findViewById(R.id.txtLives);
-        String hearts = "";
-        for (int i = 0; i < lives; i++) {
-            hearts += new String(Character.toChars(HEART_RED_UNICODE));
-        }
-        txtLives.setText(hearts);
+        txtCoins.setText("Coins Earned: " + coins);
+        GameActivity.updateLives(lives, txtLives);
 
 
 
@@ -142,7 +135,7 @@ public class SlideChangeGame extends AppCompatActivity {
         }
         Intent intent = new Intent();
         intent.putExtra("success", success);
-        setResult(SLIDE_CHANGE_GAME_RES_CODE, intent);
+        setResult(RESULT_OK, intent);
         layChangeSlides.setVisibility(View.GONE);
         finish();
     }

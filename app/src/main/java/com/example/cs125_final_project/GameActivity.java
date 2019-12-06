@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.transition.Slide;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.Locale;
 import java.util.Random;
@@ -16,22 +19,23 @@ import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
     /** Array of all the games, maybe later put in options to select games and such */
-    private Game[] games;
+    private Class[] games = new Class[] {SlideChangeGame.class,
+                                        ClickLogoGame.class};
     /**Textbox holding the challen coins*/
     private TextView txtCoins;
     /**Tells the player if they failed or passed after their minigame */
     private TextView txtPassFail;
-    /**layout containting the pass fail message */
     private LinearLayout layPassFail;
+
+    /**Fail message uses the game title textview*/
+    private TextView txtGameTitle;
 
     /**lives*/
     private int lives;
-    private TextView txtLives;
     public final static int HEART_RED_UNICODE = 0x2764;
-
+    private TextView txtLives;
     /**coins*/
     private int coins;
-    public final static int SLIDE_CHANGE_GAME_REQ_CODE = 0;
     /**colors*/
     public final static int COLOR_GREEN = 0xff00ff00;
     public final static int COLOR_RED = 0xffff0000;
@@ -50,10 +54,10 @@ public class GameActivity extends AppCompatActivity {
         txtPassFail = findViewById(R.id.txtPassFail);
         layPassFail = findViewById(R.id.layPassFail);
         txtLives = findViewById(R.id.txtLives);
-
+        txtGameTitle = findViewById(R.id.txtGameTitle);
         //Set up lives and coins
         lives = 3;
-        updateLives();
+        updateLives(lives, txtLives);
         coins = 0;
 
         layPassFail.setVisibility(View.VISIBLE);
@@ -89,23 +93,38 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SLIDE_CHANGE_GAME_REQ_CODE) {
-            // Do something that depends on the result of that request
+        if (resultCode == RESULT_OK) {
             boolean success = data.getBooleanExtra("success", false);
             if (success) {
-                coins += 1;
                 txtPassFail.setTextColor(COLOR_GREEN);
                 txtPassFail.setText("Pass :)");
             } else {
                 txtPassFail.setTextColor(COLOR_RED);
-                txtPassFail.setText("Failed!");
                 lives--;
+                if (lives > 0) {
+                    txtPassFail.setText("Failed!");
+                } else {
+                    txtPassFail.setText("Game Over");
+                }
+
             }
             layPassFail.setVisibility(View.VISIBLE);
+
+            if (requestCode == SlideChangeGame.SLIDE_CHANGE_GAME_END_CODE) {
+                // Do something that depends on the result of that request
+                if (success) {
+                    coins += 2;
+                }
+
+            } else if (requestCode == ClickLogoGame.CLICK_LOGO_GAME_END_CODE) {
+                if (success) {
+                    coins += 3;
+                }
+            }
         }
 
         updateCoins();
-        updateLives();
+        updateLives(lives, txtLives);
         CountDownTimer timer = new CountDownTimer(passFailTimerMillisLeft, 1000) {
             @Override
             public void onTick(long l) {
@@ -136,16 +155,25 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startNewMiniGame() {
-        Intent intentSlidesChange = new Intent(this, SlideChangeGame.class);
+        Random r = new Random();
+        int gameSelect = r.nextInt(2);
+
+        Intent intentSlidesChange = new Intent(this, games[gameSelect]);
         addInfoToMiniGameIntent(intentSlidesChange);
-        startActivityForResult(intentSlidesChange, SLIDE_CHANGE_GAME_REQ_CODE);
+        startActivityForResult(intentSlidesChange, gameSelect);
     }
 
     private void addInfoToMiniGameIntent(Intent intent) {
         intent.putExtra("coins", coins);
         intent.putExtra("lives", lives);
     }
-    private void updateLives() {
+
+    /**
+     * Static method that updates the lives textbox anywhere
+     * @param lives
+     * @param txtLives
+     */
+    public static void updateLives(int lives, TextView txtLives) {
         String hearts = "";
         for (int i = 0; i < lives; i++) {
             hearts += new String(Character.toChars(HEART_RED_UNICODE));
@@ -154,6 +182,9 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Ends the entire game
+     */
     private void endFullGame() {
         Intent intent = new Intent();
         intent.putExtra("challenCoins", coins);
