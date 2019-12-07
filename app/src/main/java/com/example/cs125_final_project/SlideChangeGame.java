@@ -1,5 +1,6 @@
 package com.example.cs125_final_project;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.os.CountDownTimer;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.w3c.dom.Text;
@@ -49,7 +51,6 @@ public class SlideChangeGame extends AppCompatActivity {
         //Set the imageviews to a slide
         Random r = new Random();
         geoffSlide = r.nextInt(slideImages.length);
-        System.out.println("initializing geoffSlide to: " + geoffSlide);
         currentSlide = geoffSlide;
         while (currentSlide == geoffSlide) {
             currentSlide = r.nextInt(slideImages.length);
@@ -94,7 +95,7 @@ public class SlideChangeGame extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                endGame();
+                endGame(RESULT_OK);
             }
         }.start();
         //This needs to be declared in the OnCreate first then it can be used, maybe global variable?
@@ -128,16 +129,40 @@ public class SlideChangeGame extends AppCompatActivity {
         txtTimer.setText("Time Left: " + seconds);
     }
 
-    private void endGame() {
+    private void endGame(int endCode) {
         boolean success = false;
         if (currentSlide == geoffSlide) {
             success = true;
         }
         Intent intent = new Intent();
         intent.putExtra("success", success);
-        setResult(RESULT_OK, intent);
+        setResult(endCode, intent);
         layChangeSlides.setVisibility(View.GONE);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        timer.cancel();
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setMessage("Do you really want to quit?")
+                .setTitle("Quitting?")
+                .setPositiveButton(R.string.finish_game, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        endGame(RESULT_CANCELED);
+                    }
+                })
+                .setNegativeButton(R.string.continue_game, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        timer.start();
+                    }
+                });
+
+        AlertDialog dialog = alertBuilder.create();
+        dialog.show();
+    }
+
 
 }

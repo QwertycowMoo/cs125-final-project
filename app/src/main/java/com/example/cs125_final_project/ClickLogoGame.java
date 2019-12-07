@@ -1,7 +1,9 @@
 package com.example.cs125_final_project;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -20,6 +22,7 @@ public class ClickLogoGame extends AppCompatActivity {
 
     /**timer*/
     private TextView txtTimer;
+    private CountDownTimer timer;
     /**Number of seconds for the timer*/
     private long timeMillisLeft;
 
@@ -59,7 +62,7 @@ public class ClickLogoGame extends AppCompatActivity {
     }
 
     private void playGame() {
-        CountDownTimer timer = new CountDownTimer(timeMillisLeft, 1000) {
+        timer = new CountDownTimer(timeMillisLeft, 1000) {
             @Override
             public void onTick(long l) {
                 timeMillisLeft = l;
@@ -68,7 +71,7 @@ public class ClickLogoGame extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                endGame(true);
+                endGame(RESULT_OK);
             }
         }.start();
         ImageView imgLogoClick = findViewById(R.id.imgLogoClick);
@@ -80,15 +83,14 @@ public class ClickLogoGame extends AppCompatActivity {
             }
         });
     }
-    private void endGame(boolean isEndedByTime) {
+    private void endGame(int endCode) {
         Intent intent = new Intent();
         if (clickCount == clickGoal) {
             intent.putExtra("success", true);
         } else {
             intent.putExtra("success", false);
         }
-        setResult(RESULT_OK, intent);
-
+        setResult(endCode, intent);
         LinearLayout layClickLogo = findViewById(R.id.layClickCSLogo);
         layClickLogo.setVisibility(View.GONE);
         finish();
@@ -98,4 +100,28 @@ public class ClickLogoGame extends AppCompatActivity {
         int seconds = (int) timeMillisLeft / 1000;
         txtTimer.setText("Time Left: " + seconds);
     }
+
+    @Override
+    public void onBackPressed() {
+        timer.cancel();
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setMessage("Do you really want to quit?")
+                .setTitle("Quitting?")
+                .setPositiveButton(R.string.finish_game, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        endGame(RESULT_CANCELED);
+                    }
+                })
+                .setNegativeButton(R.string.continue_game, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        timer.start();
+                    }
+                });
+
+        AlertDialog dialog = alertBuilder.create();
+        dialog.show();
+    }
+
 }
