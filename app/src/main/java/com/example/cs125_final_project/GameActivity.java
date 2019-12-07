@@ -17,7 +17,8 @@ public class GameActivity extends AppCompatActivity {
     /** Array of all the games, maybe later put in options to select games and such */
     private Class[] games = new Class[] {SlideChangeGame.class,
                                         ClickLogoGame.class,
-                                        SmashBugsGame.class};
+                                        SmashBugsGame.class,
+                                        QuestionsGame.class};
     private int gameSelect;
     /**Textbox holding the challen coins*/
     private TextView txtCoins;
@@ -125,6 +126,11 @@ public class GameActivity extends AppCompatActivity {
                 case SmashBugsGame.SMASH_BUGS_GAME_END_CODE:
                     if (success) {
                         coins += 2;
+                    }
+                    break;
+                case QuestionsGame.QUESTIONS_GAME_END_CODE:
+                    if (success) {
+                        coins += 1;
                     }
                     break;
             }
