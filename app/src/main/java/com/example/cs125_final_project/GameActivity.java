@@ -1,27 +1,24 @@
 package com.example.cs125_final_project;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.transition.Slide;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity {
     /** Array of all the games, maybe later put in options to select games and such */
     private Class[] games = new Class[] {SlideChangeGame.class,
                                         ClickLogoGame.class,
                                         SmashBugsGame.class};
+    private int gameSelect;
     /**Textbox holding the challen coins*/
     private TextView txtCoins;
     /**Tells the player if they failed or passed after their minigame */
@@ -43,6 +40,9 @@ public class GameActivity extends AppCompatActivity {
     /**timer*/
     private long passFailTimerMillisLeft = TIMER_RESET;
     public final static long TIMER_RESET = 2000;
+    private CountDownTimer timer;
+
+    public static final int QUIT_GAME_END_CODE = -1;
 
 
     @Override
@@ -64,7 +64,7 @@ public class GameActivity extends AppCompatActivity {
         layPassFail.setVisibility(View.VISIBLE);
         txtPassFail.setTextColor(getResources().getColor(R.color.topGradient));
         txtPassFail.setText("Ready?");
-        CountDownTimer timer = new CountDownTimer(passFailTimerMillisLeft, 1000) {
+        timer = new CountDownTimer(passFailTimerMillisLeft, 1000) {
             @Override
             public void onTick(long l) {
                 passFailTimerMillisLeft = l;
@@ -111,41 +111,50 @@ public class GameActivity extends AppCompatActivity {
             }
             layPassFail.setVisibility(View.VISIBLE);
 
-            if (requestCode == SlideChangeGame.SLIDE_CHANGE_GAME_END_CODE) {
-                // Do something that depends on the result of that request
-                if (success) {
-                    coins += 2;
+            switch (requestCode) {
+                case SlideChangeGame.SLIDE_CHANGE_GAME_END_CODE:
+                    if (success) {
+                        coins += 2;
+                    }
+                    break;
+                case ClickLogoGame.CLICK_LOGO_GAME_END_CODE:
+                    if (success) {
+                        coins += 3;
+                    }
+                    break;
+                case SmashBugsGame.SMASH_BUGS_GAME_END_CODE:
+                    if (success) {
+                        coins += 2;
+                    }
+                    break;
+            }
+
+
+            updateCoins();
+            updateLives(lives, txtLives);
+            timer = new CountDownTimer(passFailTimerMillisLeft, 1000) {
+                @Override
+                public void onTick(long l) {
+                    passFailTimerMillisLeft = l;
+                    System.out.println(passFailTimerMillisLeft);
                 }
 
-            } else if (requestCode == ClickLogoGame.CLICK_LOGO_GAME_END_CODE) {
-                if (success) {
-                    coins += 3;
+                @Override
+                public void onFinish() {
+                    //Go to a new game
+                    if (lives > 0) {
+                        startNewMiniGame();
+                        passFailTimerMillisLeft = TIMER_RESET;
+                    } else {
+                        endFullGame();
+                    }
+
                 }
-            }
+            }.start();
         }
-
-        updateCoins();
-        updateLives(lives, txtLives);
-        CountDownTimer timer = new CountDownTimer(passFailTimerMillisLeft, 1000) {
-            @Override
-            public void onTick(long l) {
-                passFailTimerMillisLeft = l;
-                System.out.println(passFailTimerMillisLeft);
-            }
-
-            @Override
-            public void onFinish() {
-                //Go to a new game
-                if (lives > 0) {
-                    startNewMiniGame();
-                    passFailTimerMillisLeft = TIMER_RESET;
-                } else {
-                    endFullGame();
-                }
-
-            }
-        }.start();
-
+        else {
+            endFullGame();
+        }
 
 
     }
@@ -157,9 +166,9 @@ public class GameActivity extends AppCompatActivity {
 
     private void startNewMiniGame() {
         Random r = new Random();
-        int gameSelect = r.nextInt(3);
+        gameSelect = r.nextInt(3);
 
-        Intent gameIntent = new Intent(this, SmashBugsGame.class);
+        Intent gameIntent = new Intent(this, games[gameSelect]);
         addInfoToMiniGameIntent(gameIntent);
         startActivityForResult(gameIntent, gameSelect);
     }
@@ -187,9 +196,33 @@ public class GameActivity extends AppCompatActivity {
      * Ends the entire game
      */
     private void endFullGame() {
+        timer.cancel();
         Intent intent = new Intent();
         intent.putExtra("challenCoins", coins);
         setResult(0, intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        timer.cancel();
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setMessage("Do you really want to quit?")
+                .setTitle("Quitting?")
+                .setPositiveButton(R.string.finish_game, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        endFullGame();
+                    }
+                })
+                .setNegativeButton(R.string.continue_game, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        timer.start();
+                    }
+                });
+
+        AlertDialog dialog = alertBuilder.create();
+        dialog.show();
     }
 }

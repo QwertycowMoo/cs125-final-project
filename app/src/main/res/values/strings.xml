@@ -4,4 +4,6 @@
     <string name="arcade_mode_label">Arcade Mode</string>
     <string name="trophy_room_label">Trophy Room</string>
     <string name="credits_label">Credits</string>
+    <string name="continue_game">Not Done Yet!</string>
+    <string name="finish_game">Yes I\'m Done</string>
 </resources>
