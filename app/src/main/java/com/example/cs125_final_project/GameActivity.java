@@ -20,7 +20,8 @@ import java.util.concurrent.TimeUnit;
 public class GameActivity extends AppCompatActivity {
     /** Array of all the games, maybe later put in options to select games and such */
     private Class[] games = new Class[] {SlideChangeGame.class,
-                                        ClickLogoGame.class};
+                                        ClickLogoGame.class,
+                                        SmashBugsGame.class};
     /**Textbox holding the challen coins*/
     private TextView txtCoins;
     /**Tells the player if they failed or passed after their minigame */
@@ -156,11 +157,11 @@ public class GameActivity extends AppCompatActivity {
 
     private void startNewMiniGame() {
         Random r = new Random();
-        int gameSelect = r.nextInt(2);
+        int gameSelect = r.nextInt(3);
 
-        Intent intentSlidesChange = new Intent(this, games[gameSelect]);
-        addInfoToMiniGameIntent(intentSlidesChange);
-        startActivityForResult(intentSlidesChange, gameSelect);
+        Intent gameIntent = new Intent(this, SmashBugsGame.class);
+        addInfoToMiniGameIntent(gameIntent);
+        startActivityForResult(gameIntent, gameSelect);
     }
 
     private void addInfoToMiniGameIntent(Intent intent) {

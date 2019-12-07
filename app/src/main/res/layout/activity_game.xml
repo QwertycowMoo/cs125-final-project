@@ -129,6 +129,7 @@
                 android:id="@+id/imgGeoffSlide"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
+                android:contentDescription="Geoff's Slide"
                 tools:srcCompat="@tools:sample/avatars[3]" />
 
             <TextView
@@ -215,8 +216,207 @@
             android:id="@+id/laySmashBugs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:visibility="gone"></LinearLayout>
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/laySmashRow1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/laySmashCol1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgBug1_1"
+                        android:layout_width="97dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="false"
+                        android:clickable="true"
+                        android:contentDescription="1,1"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug1_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="false"
+                        android:clickable="true"
+                        android:contentDescription="1,2"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug1_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="false"
+                        android:clickable="true"
+                        android:contentDescription="1,3"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug1_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="false"
+                        android:clickable="true"
+                        android:contentDescription="1,4"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/laySmashCol4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgBug4_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="4,1"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug4_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="4,2"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug4_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="4,3"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug4_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="4,4"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/laySmashCol2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgBug2_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="2,1"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug2_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="2,1"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug2_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="2,3"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug2_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="2,4"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/laySmashCol3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgBug3_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="3,1"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug3_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="3,2"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug3_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="3,3"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+
+                    <ImageView
+                        android:id="@+id/imgBug3_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:contentDescription="3,4"
+                        android:visibility="invisible"
+                        app:srcCompat="@drawable/bug_icon_foreground" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtSmashBugsSuccess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="You squashed all the bugs!"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:visibility="invisible" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

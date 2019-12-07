@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ClickLogoGame"></activity>
+        <activity android:name=".SmashBugsGame"></activity>
+        <activity android:name=".ClickLogoGame" />
         <activity android:name=".GameActivity" />
         <activity android:name=".TrophyActivity" />
         <activity android:name=".CreditsActivity" />
