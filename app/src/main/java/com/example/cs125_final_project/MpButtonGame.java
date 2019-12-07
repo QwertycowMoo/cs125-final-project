@@ -17,6 +17,8 @@ public class MpButtonGame extends AppCompatActivity {
     /**for the lives*/
     public final static int HEART_RED_UNICODE = 0x2764;
 
+    public final static int MP_BUTTON_CHANGE_GAME_RES_CODE = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,7 @@ public class MpButtonGame extends AppCompatActivity {
 
         //Update Game Title
         TextView txtGameTitle = findViewById(R.id.txtGameTitle);
-        txtGameTitle.setText("Match the Slide!");
+        txtGameTitle.setText("Push your MP!");
         //playGame();
 
     }
