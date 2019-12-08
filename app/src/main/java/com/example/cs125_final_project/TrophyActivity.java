@@ -19,6 +19,7 @@ public class TrophyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trophy);
         ImageButton trophy_back = findViewById(R.id.button_back);
         trophy_back.setVisibility(VISIBLE);
+        updateCoins();
         trophy_back.setOnClickListener(v -> {
             trophy_back.setVisibility(INVISIBLE);
             finish();
@@ -27,7 +28,6 @@ public class TrophyActivity extends AppCompatActivity {
         /** Textview for setting messages from clicking/earning trophies.
          * this is automatically defaulted to nothing. */
         TextView trophy_message = findViewById(R.id.trophy_message);
-        trophy_message.setText("test message");
         /** On-click Listeners for the trophies. If a trophy has not been collected, but the trophy is
          * clicked and the requirements have been met, the trophy will appear. */
 
@@ -65,5 +65,16 @@ public class TrophyActivity extends AppCompatActivity {
         trophy_kevin.setOnClickListener(v -> {
             trophy_message.setText("Kevin Zhou: \nSoon-to-be CS + Music Major, \nplays Ultimate Frisbee on weekends.");
         });
+    }
+
+    private void updateCoins() {
+        TextView coinText = findViewById(R.id.trophy_coins);
+        int coins = getIntent().getIntExtra("coins", 0);
+        switch(coins) {
+            case 1:
+                coinText.setText(coins + " Challen Coin");
+            default:
+                coinText.setText(coins + " Challen Coins");
+        }
     }
 }

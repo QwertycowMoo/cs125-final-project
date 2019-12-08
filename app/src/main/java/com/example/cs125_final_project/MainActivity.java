@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnTrophy.setOnClickListener(v -> {
             Intent intentTrophy = new Intent(this, TrophyActivity.class);
+            intentTrophy.putExtra("coins", coins);
+            System.out.println("sending coins of value " + coins);
             startActivity(intentTrophy);
         });
 
