@@ -172,7 +172,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void startNewMiniGame() {
         Random r = new Random();
-        gameSelect = r.nextInt(3);
+        gameSelect = r.nextInt(4);
 
         Intent gameIntent = new Intent(this, games[gameSelect]);
         addInfoToMiniGameIntent(gameIntent);

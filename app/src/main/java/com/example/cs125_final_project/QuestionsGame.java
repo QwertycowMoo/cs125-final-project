@@ -48,7 +48,15 @@ public class QuestionsGame extends AppCompatActivity {
         //So the index of the correct answer is the answer's index in the String array
         questionsAnswer = new HashMap<>();
         questionsAnswer.put(new String[]{"What is Geoff's Last Name?", "Chalen", "Challen", "Callen", "Challan"}, 2);
-
+        questionsAnswer.put(new String[]{"How many MP Checkpoints were there?", "3", "7", "4", "2"}, 3);
+        questionsAnswer.put(new String[]{"How many hours of sleep should a CS student get?", "8 like a normal human", "5", "12 but only on certain days", "3?"}, 1);
+        questionsAnswer.put(new String[]{"What is the amount of time needed for Merge Sort of n items?", "O(n)", "O(log n)", "O(n^2)", "O(n log n)"}, 4);
+        questionsAnswer.put(new String[]{"What grade should this project get?", "100 fo sure", "0", "70", "0 again"}, 1);
+        questionsAnswer.put(new String[]{"Which part of these is not part of Checkstyle?", "Spacing after parentheses", "Comments for methods", "Using getters and setters", "Using semicolons"}, 4);
+        questionsAnswer.put(new String[]{"What does DCL stand for?", "Digital Computer Library", "Digital Computing Literacy", "Donuts Can't Love", "Digital Core Library"}, 1);
+        questionsAnswer.put(new String[]{"Which of these is not a valid CS+ route?", "CS+Crop Sciences", "CS+Music", "CS+Philosophy", "CS+Kinesiology"}, 4);
+        questionsAnswer.put(new String[]{"What is Geoff's Last Name?", "Chalen", "Challen", "Callen", "Challan"}, 2);
+        questionsAnswer.put(new String[]{"How many computer science students enrolled for the class of 2019?", "~1800", "~2300", "~1200", "~700"}, 1);
         questionKeys = new ArrayList<>(questionsAnswer.keySet());
         //setting up timer
         txtTimer = findViewById(R.id.txtTimer);
@@ -86,9 +94,12 @@ public class QuestionsGame extends AppCompatActivity {
         btnAnswer3.setOnClickListener(v -> {
             answerClicked(3);
         });
-        btnAnswer3.setOnClickListener(v -> {
-            answerClicked(3);
+        btnAnswer4.setOnClickListener(v -> {
+            answerClicked(4);
         });
+
+        TextView txtGameTitle = findViewById(R.id.txtGameTitle);
+        txtGameTitle.setText("Question Time!");
         playGame();
     }
 
@@ -100,7 +111,6 @@ public class QuestionsGame extends AppCompatActivity {
         }
     }
     private void playGame() {
-
         timer = new CountDownTimer(timeMillisLeft, 1000) {
             @Override
             public void onTick(long l) {
