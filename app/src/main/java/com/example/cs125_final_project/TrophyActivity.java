@@ -19,7 +19,10 @@ public class TrophyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trophy);
         ImageButton trophy_back = findViewById(R.id.button_back);
         trophy_back.setVisibility(VISIBLE);
-        updateCoins();
+        int coins = getIntent().getIntExtra("coins", 0);
+        boolean[] trophies = getIntent().getBooleanArrayExtra("trophies");
+        int temp = 0;
+        updateCoins(coins);
         trophy_back.setOnClickListener(v -> {
             trophy_back.setVisibility(INVISIBLE);
             finish();
@@ -48,18 +51,31 @@ public class TrophyActivity extends AppCompatActivity {
 
         ImageButton trophy_ben = findViewById(R.id.trophy_ben);
         trophy_ben.setOnClickListener(v -> {
-            trophy_message.setText("Head CA Ben Nordick: \nSecond command, \nalso made a bus app.");
+            trophy_message.setText("Head CA Ben Nordick: \nSecond command, \nmade a successful bus app.");
         });
 
         ImageButton trophy_david = findViewById(R.id.trophy_david);
         trophy_david.setOnClickListener(v -> {
-            trophy_message.setText("CA David Ruvinskiy: \nKnight of the Office Hours, \nalso has apps on the app store.");
+            trophy_message.setText("CA David Ruvinskiy: \nKnight of the Office Hours, \nhas two apps on the app store.");
         });
 
         ImageButton trophy_evan = findViewById(R.id.trophy_evan);
-        trophy_evan.setOnClickListener(v -> {
-            trophy_message.setText("Evan Matthews: \nCS + Music Major, \nhas a huge sweater collection.");
-        });
+        if (coins == 1 || trophies[5] == true) {
+            trophy_evan.setVisibility(VISIBLE);
+            temp = 0;
+        } else {
+            //trophy_evan.setVisibility(INVISIBLE);
+            temp = 1;
+        }
+        if (temp == 0) {
+            trophy_evan.setOnClickListener(v -> {
+                trophy_message.setText("Evan Matthews: \nCS + Music Major, \nhas a huge sweater collection.");
+            });
+        } else {
+            trophy_evan.setOnClickListener(v -> {
+                trophy_message.setText("* * * LOCKED: * * * \nOpen the trophy room with \na single Challen coin.");
+            });
+        }
 
         ImageButton trophy_kevin = findViewById(R.id.trophy_kevin);
         trophy_kevin.setOnClickListener(v -> {
@@ -67,14 +83,12 @@ public class TrophyActivity extends AppCompatActivity {
         });
     }
 
-    private void updateCoins() {
+    private void updateCoins(int coins) {
         TextView coinText = findViewById(R.id.trophy_coins);
-        int coins = getIntent().getIntExtra("coins", 0);
-        switch(coins) {
-            case 1:
-                coinText.setText(coins + " Challen Coin");
-            default:
-                coinText.setText(coins + " Challen Coins");
+        if (coins == 1) {
+            coinText.setText(coins + " Challen Coin");
+        } else {
+            coinText.setText(coins + " Challen Coins");
         }
     }
 }

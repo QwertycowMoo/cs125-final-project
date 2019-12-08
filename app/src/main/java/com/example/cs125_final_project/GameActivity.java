@@ -115,17 +115,17 @@ public class GameActivity extends AppCompatActivity {
             switch (requestCode) {
                 case SlideChangeGame.SLIDE_CHANGE_GAME_END_CODE:
                     if (success) {
-                        coins += 2;
+                        coins += 1;
                     }
                     break;
                 case ClickLogoGame.CLICK_LOGO_GAME_END_CODE:
                     if (success) {
-                        coins += 3;
+                        coins += 1;
                     }
                     break;
                 case SmashBugsGame.SMASH_BUGS_GAME_END_CODE:
                     if (success) {
-                        coins += 2;
+                        coins += 1;
                     }
                     break;
                 case QuestionsGame.QUESTIONS_GAME_END_CODE:

@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     /**Coins: needs to find a way to store coins after app is closed*/
     private int coins;
 
+    /** Array of trophies earned as a boolean[] */
+    private boolean[] trophies;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
         Button btnCredits = findViewById(R.id.btnCredits);
         Button btnTrophy = findViewById(R.id.btnTrophyRoom);
 
+        // Initializes coins to 0... will be replaced with JSON I/O stuff
         coins = 0;
+        trophies = new boolean[7];
 
         btnCredits.setOnClickListener(v -> {
             Intent intentCredits = new Intent(this, CreditsActivity.class);
@@ -33,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         btnTrophy.setOnClickListener(v -> {
             Intent intentTrophy = new Intent(this, TrophyActivity.class);
             intentTrophy.putExtra("coins", coins);
-            System.out.println("sending coins of value " + coins);
+            intentTrophy.putExtra("trophies", trophies);
             startActivity(intentTrophy);
         });
 
@@ -57,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateCoins() {
         TextView coinText = findViewById(R.id.txtMainCoins);
-        switch(coins) {
-            case 1:
-                coinText.setText(coins + " Challen Coin");
-            default:
-                coinText.setText(coins + " Challen Coins");
+        if (coins == 1) {
+            coinText.setText(coins + " Challen Coin");
+            trophies[5] = true;
+        } else {
+            coinText.setText(coins + " Challen Coins");
         }
     }
 }
