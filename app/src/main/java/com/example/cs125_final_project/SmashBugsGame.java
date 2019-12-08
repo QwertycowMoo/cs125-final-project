@@ -87,6 +87,9 @@ public class SmashBugsGame extends AppCompatActivity{
         GameActivity.updateLives(lives, txtLives);
         txtCoins.setText("Coins Earned: " + coins);
 
+
+        TextView txtGameTitle = findViewById(R.id.txtGameTitle);
+        txtGameTitle.setText("Squash the Bugs in the Code!");
         //Timer and begin game
         timeMillisLeft = 10000;
         playGame();

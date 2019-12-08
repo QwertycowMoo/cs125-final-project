@@ -17,7 +17,8 @@ public class GameActivity extends AppCompatActivity {
     /** Array of all the games, maybe later put in options to select games and such */
     private Class[] games = new Class[] {SlideChangeGame.class,
                                         ClickLogoGame.class,
-                                        SmashBugsGame.class};
+                                        SmashBugsGame.class,
+                                        QuestionsGame.class};
     private int gameSelect;
     /**Textbox holding the challen coins*/
     private TextView txtCoins;
@@ -127,6 +128,11 @@ public class GameActivity extends AppCompatActivity {
                         coins += 2;
                     }
                     break;
+                case QuestionsGame.QUESTIONS_GAME_END_CODE:
+                    if (success) {
+                        coins += 1;
+                    }
+                    break;
             }
 
 
@@ -166,7 +172,7 @@ public class GameActivity extends AppCompatActivity {
 
     private void startNewMiniGame() {
         Random r = new Random();
-        gameSelect = r.nextInt(3);
+        gameSelect = r.nextInt(4);
 
         Intent gameIntent = new Intent(this, games[gameSelect]);
         addInfoToMiniGameIntent(gameIntent);
