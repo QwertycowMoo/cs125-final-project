@@ -21,7 +21,7 @@ public class TrophyActivity extends AppCompatActivity {
     private boolean[] trophies;
 
     /** Array of ints storing the costs of certain trophies */
-    private final int[] COST = {0, 0, 0, 200, 0, 0, 0};
+    private final int[] COST = {500, 100, 150, 200, 50, 1, 20};
 
     /** Integer to hold the number of coins the user has. Will be passed back to MainActivity. */
     private int coins;
@@ -48,6 +48,24 @@ public class TrophyActivity extends AppCompatActivity {
             finish();
         });
 
+        /** Imageviews for the sters. very important. */
+        ImageView ster0 = findViewById(R.id.ster0);
+        ImageView ster1 = findViewById(R.id.ster1);
+        int complete = 0;
+        for (int i = 0; i < trophies.length; i++) {
+            if (!trophies[i]) {
+                complete++;
+                break;
+            }
+        }
+        if (complete == 0) {
+            ster0.setVisibility(VISIBLE);
+            ster1.setVisibility(VISIBLE);
+        } else {
+            ster0.setVisibility(INVISIBLE);
+            ster1.setVisibility(INVISIBLE);
+        }
+
         /** Textview for setting messages from clicking/earning trophies.
          * this is automatically defaulted to nothing. */
         TextView trophy_message = findViewById(R.id.trophy_message);
@@ -57,9 +75,6 @@ public class TrophyActivity extends AppCompatActivity {
         //__________________________________________________________________________________________
         ImageButton trophy_geoff = findViewById(R.id.trophy_geoff);
         boolean trophy0;
-        if (coins >= 1000) {
-            trophies[0] = true;
-        }
         if (trophies[0] == true) {
             trophy_geoff.setColorFilter(Color.TRANSPARENT);
             trophy0 = true;
@@ -74,26 +89,71 @@ public class TrophyActivity extends AppCompatActivity {
             });
         } else {
             trophy_geoff.setOnClickListener(view -> {
-                buy_trophy.setVisibility(INVISIBLE);
-                trophy_message.setText("* * * LOCKED: * * * \nOpen the Trophy Room after \naccumulating 1,000 Challen Coins.");
+                if (coins >= COST[0]) {
+                    buy_trophy.setVisibility(VISIBLE);
+                    buy_trophy.setOnClickListener(v -> {
+                        buyTrophy(0);
+                    });
+                }
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 500 Challen Coins.");
             });
         }
 
         //__________________________________________________________________________________________
 
         ImageButton trophy_daniel = findViewById(R.id.trophy_daniel);
-        trophy_daniel.setOnClickListener(v -> {
-            buy_trophy.setVisibility(INVISIBLE);
-            trophy_message.setText("Office Captain Daniel Gleason: \nValiant gamer, \nsavior of many MPs.");
-        });
+        boolean trophy1;
+        if (trophies[1] == true) {
+            trophy_daniel.setColorFilter(Color.TRANSPARENT);
+            trophy1 = true;
+        } else {
+            trophy_daniel.setColorFilter(Color.rgb(33, 35, 36));
+            trophy1 = false;
+        }
+        if (trophy1) {
+            trophy_daniel.setOnClickListener(v -> {
+                buy_trophy.setVisibility(INVISIBLE);
+                trophy_message.setText("Office Captain Daniel Gleason: \nValiant gamer, \nsavior of many MPs.");
+            });
+        } else {
+            trophy_daniel.setOnClickListener(view -> {
+                if (coins >= COST[1]) {
+                    buy_trophy.setVisibility(VISIBLE);
+                    buy_trophy.setOnClickListener(v -> {
+                        buyTrophy(1);
+                    });
+                }
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 100 Challen Coins.");
+            });
+        }
 
         //__________________________________________________________________________________________
 
         ImageButton trophy_rima = findViewById(R.id.trophy_rima);
-        trophy_rima.setOnClickListener(v -> {
-            buy_trophy.setVisibility(INVISIBLE);
-            trophy_message.setText("Office Captain Rima Bouhal: \nFrequent forum user, \nenjoys reading CS 125 memes.");
-        });
+        boolean trophy2;
+        if (trophies[2] == true) {
+            trophy_rima.setColorFilter(Color.TRANSPARENT);
+            trophy2 = true;
+        } else {
+            trophy_rima.setColorFilter(Color.rgb(33, 35, 36));
+            trophy2 = false;
+        }
+        if (trophy2) {
+            trophy_rima.setOnClickListener(v -> {
+                buy_trophy.setVisibility(INVISIBLE);
+                trophy_message.setText("Office Captain Rima Bouhal: \nFrequent forum user, \nenjoys reading CS 125 memes.");
+            });
+        } else {
+            trophy_rima.setOnClickListener(view -> {
+                if (coins >= COST[2]) {
+                    buy_trophy.setVisibility(VISIBLE);
+                    buy_trophy.setOnClickListener(v -> {
+                        buyTrophy(2);
+                    });
+                }
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 150 Challen Coins.");
+            });
+        }
 
         //__________________________________________________________________________________________
 
@@ -123,20 +183,39 @@ public class TrophyActivity extends AppCompatActivity {
             });
         }
 
-
         //__________________________________________________________________________________________
 
         ImageButton trophy_david = findViewById(R.id.trophy_david);
-        trophy_david.setOnClickListener(v -> {
-            buy_trophy.setVisibility(INVISIBLE);
-            trophy_message.setText("CA David Ruvinskiy: \nKnight of the Office Hours, \nhas two apps on the app store.");
-        });
+        boolean trophy4;
+        if (trophies[4] == true) {
+            trophy_david.setColorFilter(Color.TRANSPARENT);
+            trophy4 = true;
+        } else {
+            trophy_david.setColorFilter(Color.rgb(33, 35, 36));
+            trophy4 = false;
+        }
+        if (trophy4) {
+            trophy_david.setOnClickListener(v -> {
+                buy_trophy.setVisibility(INVISIBLE);
+                trophy_message.setText("CA David Ruvinskiy: \nKnight of the Office Hours, \nhas two apps on the app store.");
+            });
+        } else {
+            trophy_david.setOnClickListener(view -> {
+                if (coins >= COST[4]) {
+                    buy_trophy.setVisibility(VISIBLE);
+                    buy_trophy.setOnClickListener(v -> {
+                        buyTrophy(4);
+                    });
+                }
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 50 Challen Coins.");
+            });
+        }
 
         //__________________________________________________________________________________________
 
         ImageButton trophy_evan = findViewById(R.id.trophy_evan);
         boolean trophy5;
-        if (coins == 1) {
+        if (coins == COST[5]) {
             trophies[5] = true;
         }
         if (trophies[5] == true) {
@@ -161,10 +240,30 @@ public class TrophyActivity extends AppCompatActivity {
         //__________________________________________________________________________________________
 
         ImageButton trophy_kevin = findViewById(R.id.trophy_kevin);
-        trophy_kevin.setOnClickListener(v -> {
-            buy_trophy.setVisibility(INVISIBLE);
-            trophy_message.setText("Kevin Zhou: \nSoon-to-be CS + Music Major, \nplays Ultimate Frisbee on weekends.");
-        });
+        boolean trophy6;
+        if (trophies[6] == true) {
+            trophy_kevin.setColorFilter(Color.TRANSPARENT);
+            trophy6 = true;
+        } else {
+            trophy_kevin.setColorFilter(Color.rgb(33, 35, 36));
+            trophy6 = false;
+        }
+        if (trophy6) {
+            trophy_kevin.setOnClickListener(v -> {
+                buy_trophy.setVisibility(INVISIBLE);
+                trophy_message.setText("Kevin Zhou: \nSoon-to-be CS + Music Major, \nplays Ultimate Frisbee on weekends.");
+            });
+        } else {
+            trophy_kevin.setOnClickListener(view -> {
+                if (coins >= COST[6]) {
+                    buy_trophy.setVisibility(VISIBLE);
+                    buy_trophy.setOnClickListener(v -> {
+                        buyTrophy(6);
+                    });
+                }
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 20 Challen Coins.");
+            });
+        }
     }
 
     private void updateCoins(int coins) {
