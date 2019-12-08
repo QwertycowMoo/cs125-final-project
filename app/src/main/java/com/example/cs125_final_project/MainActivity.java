@@ -29,9 +29,11 @@ public class MainActivity extends AppCompatActivity {
         trophies = new boolean[7];
 
         btnCredits.setOnClickListener(v -> {
+            coins = coins + 1000;
             Intent intentCredits = new Intent(this, CreditsActivity.class);
             System.out.println(intentCredits);
             startActivity(intentCredits);
+            updateCoins();
         });
 
 

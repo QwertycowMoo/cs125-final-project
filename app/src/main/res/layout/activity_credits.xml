@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:text="Images of:"
+        android:text="with Bitmojis of:"
         android:textSize="36sp" />
 
     <TextView
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:text="Ajay Tatachar"
+        android:text="Rima Bouhal"
         android:textSize="24sp" />
 
     <TextView
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:text="Ahmad Dinkins"
+        android:text="David Ruvinskiy"
         android:textSize="24sp" />
 
     <Button

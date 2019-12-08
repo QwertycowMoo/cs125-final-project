@@ -80,6 +80,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#00FFFFFF"
+                        android:tint="@android:color/transparent"
                         app:srcCompat="@mipmap/trophy_david_foreground" />
 
                     <ImageButton
@@ -88,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="#00FFFFFF"
+                        android:tint="#212324"
                         app:srcCompat="@mipmap/trophy_evan_foreground" />
 
                     <ImageButton
