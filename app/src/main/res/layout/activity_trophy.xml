@@ -104,18 +104,26 @@
                 <LinearLayout
                     android:id="@+id/shelf4"
                     android:layout_width="match_parent"
-                    android:layout_height="108dp"
-                    android:orientation="horizontal">
+                    android:layout_height="141dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/trophy_message"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="83dp"
                         android:layout_weight="1"
                         android:autoText="false"
                         android:background="#CCCECE"
-                        android:text="Click a trophy to view it's info."
+                        android:text="Click a trophy to view its info."
                         android:textSize="25sp" />
+
+                    <Button
+                        android:id="@+id/buy_trophy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#673AB7"
+                        android:text="Buy Trophy" />
                 </LinearLayout>
 
                 <TextView
@@ -140,6 +148,7 @@
                         android:layout_height="80dp"
                         android:layout_margin="16px"
                         android:layout_weight="1"
+                        android:background="#673AB7"
                         android:padding="16px"
                         app:srcCompat="@android:drawable/ic_menu_revert" />
                 </LinearLayout>

@@ -1,8 +1,10 @@
 package com.example.cs125_final_project;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,11 +12,11 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
-    /**Coins: needs to find a way to store coins after app is closed*/
-    private int coins;
+    /** The user's Challen Coins*/
+    private int coins = 0;
 
     /** Array of trophies earned as a boolean[] */
-    private boolean[] trophies;
+    private boolean[] trophies = new boolean[7];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnGame = findViewById(R.id.btnArcadeMode);
         Button btnCredits = findViewById(R.id.btnCredits);
         Button btnTrophy = findViewById(R.id.btnTrophyRoom);
-
-        // Initializes coins to 0... will be replaced with JSON I/O stuff
-        coins = 0;
-        trophies = new boolean[7];
+        Button btnReset = findViewById(R.id.btnReset);
 
         btnCredits.setOnClickListener(v -> {
             coins = coins + 1000;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intentTrophy = new Intent(this, TrophyActivity.class);
             intentTrophy.putExtra("coins", coins);
             intentTrophy.putExtra("trophies", trophies);
-            startActivity(intentTrophy);
+            startActivityForResult(intentTrophy, 2);
         });
 
         btnGame.setOnClickListener(v -> {
@@ -49,6 +48,30 @@ public class MainActivity extends AppCompatActivity {
             //make UI element to keep track of Challen Coins
             Intent intentGame = new Intent(this, GameActivity.class);
             startActivityForResult(intentGame, 0);
+        });
+
+        btnReset.setOnClickListener(v -> {
+            AlertDialog.Builder alertReset = new AlertDialog.Builder(this);
+            alertReset.setMessage("Are you sure you want to reset?" +
+                    " This will remove all of your coins and trophies.")
+                    .setTitle("Reset")
+                    .setPositiveButton("Reset Progress", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            coins = 0;
+                            updateCoins();
+                            trophies = new boolean[7];
+                        }
+                    })
+                    .setNegativeButton("Cancel Action", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+            AlertDialog dialog = alertReset.create();
+            dialog.show();
         });
     }
 
@@ -59,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
             coins += data.getIntExtra("challenCoins", 0);
             System.out.println(coins);
         }
+        if (resultCode == 2) {
+            coins = data.getIntExtra("coinsToReturn", 0);
+            trophies = data.getBooleanArrayExtra("trophiesToReturn");
+        }
         updateCoins();
     }
 
@@ -66,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         TextView coinText = findViewById(R.id.txtMainCoins);
         if (coins == 1) {
             coinText.setText(coins + " Challen Coin");
-            trophies[5] = true;
         } else {
             coinText.setText(coins + " Challen Coins");
         }

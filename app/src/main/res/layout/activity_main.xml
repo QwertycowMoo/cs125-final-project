@@ -64,6 +64,7 @@
                 android:padding="10dp"
                 android:text="@string/arcade_mode_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#12264C"
                 android:textSize="30sp"
                 android:typeface="monospace" />
 
@@ -77,6 +78,7 @@
                 android:padding="10dp"
                 android:text="@string/trophy_room_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#12264C"
                 android:textSize="30sp"
                 android:typeface="monospace" />
 
@@ -90,6 +92,21 @@
                 android:padding="10dp"
                 android:text="@string/credits_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#12264C"
+                android:textSize="30sp"
+                android:typeface="monospace" />
+
+            <Button
+                android:id="@+id/btnReset"
+                android:layout_width="203dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="#673AB7"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="Reset Progress"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#12264C"
                 android:textSize="30sp"
                 android:typeface="monospace" />
 
