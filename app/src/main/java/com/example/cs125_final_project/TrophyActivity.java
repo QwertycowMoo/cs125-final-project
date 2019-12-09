@@ -215,9 +215,6 @@ public class TrophyActivity extends AppCompatActivity {
 
         ImageButton trophy_evan = findViewById(R.id.trophy_evan);
         boolean trophy5;
-        if (coins == COST[5]) {
-            trophies[5] = true;
-        }
         if (trophies[5] == true) {
             trophy_evan.setColorFilter(Color.TRANSPARENT);
             trophy5 = true;
@@ -231,9 +228,14 @@ public class TrophyActivity extends AppCompatActivity {
                 trophy_message.setText("Evan Matthews: \nCS + Music Major, \nhas a huge sweater collection.");
             });
         } else {
-            trophy_evan.setOnClickListener(v -> {
-                buy_trophy.setVisibility(INVISIBLE);
-                trophy_message.setText("* * * LOCKED: * * * \nOpen the Trophy Room with \nonly a single Challen coin.");
+            trophy_evan.setOnClickListener(view -> {
+                if (coins >= COST[5]) {
+                    buy_trophy.setVisibility(VISIBLE);
+                    buy_trophy.setOnClickListener(v -> {
+                        buyTrophy(5);
+                    });
+                }
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 1 Challen Coin.");
             });
         }
 
