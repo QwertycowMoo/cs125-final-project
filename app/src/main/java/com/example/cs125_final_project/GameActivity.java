@@ -161,8 +161,6 @@ public class GameActivity extends AppCompatActivity {
         else {
             endFullGame();
         }
-
-
     }
 
     private int updateCoins() {

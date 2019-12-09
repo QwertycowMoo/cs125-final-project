@@ -103,7 +103,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="#00FFFFFF"
-                        android:tint="#212324"
                         app:srcCompat="@mipmap/trophy_evan_foreground" />
 
                     <ImageButton
@@ -127,7 +126,7 @@
                         android:layout_height="83dp"
                         android:layout_weight="1"
                         android:autoText="false"
-                        android:background="#873AB7"
+                        android:background="@drawable/gradient_background"
                         android:gravity="center"
                         android:text="Click a trophy to view its info."
                         android:textColor="@android:color/black"
@@ -138,7 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#673AB7"
+                        android:background="@drawable/gradient_background"
                         android:text="Unlock Trophy" />
                 </LinearLayout>
 
@@ -164,7 +163,7 @@
                         android:layout_height="80dp"
                         android:layout_margin="16px"
                         android:layout_weight="1"
-                        android:background="#673AB7"
+                        android:background="@drawable/gradient_background"
                         android:padding="16px"
                         app:srcCompat="@android:drawable/ic_menu_revert" />
                 </LinearLayout>
