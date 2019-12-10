@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+/** NOTE: Our new android feature for this app is a countdown timer located in GameActivity.java */
+
 
 public class MainActivity extends AppCompatActivity {
     /** The user's Challen Coins*/
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnReset = findViewById(R.id.btnReset);
 
         btnCredits.setOnClickListener(v -> {
-            coins = coins + 1021;
+            //coins = coins + 1021;
             Intent intentCredits = new Intent(this, CreditsActivity.class);
             System.out.println(intentCredits);
             startActivity(intentCredits);

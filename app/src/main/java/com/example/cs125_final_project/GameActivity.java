@@ -65,6 +65,8 @@ public class GameActivity extends AppCompatActivity {
         layPassFail.setVisibility(View.VISIBLE);
         txtPassFail.setTextColor(getResources().getColor(R.color.topGradient));
         txtPassFail.setText("Ready?");
+
+        /** * * * timer is a new Android feature for our app. It counts down the amount of time the user has to complete each minigame. */
         timer = new CountDownTimer(passFailTimerMillisLeft, 1000) {
             @Override
             public void onTick(long l) {
