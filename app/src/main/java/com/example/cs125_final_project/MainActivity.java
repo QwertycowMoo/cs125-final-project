@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             updateCoins();
         });
 
-
         btnTrophy.setOnClickListener(v -> {
             Intent intentTrophy = new Intent(this, TrophyActivity.class);
             intentTrophy.putExtra("coins", coins);
@@ -69,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
-
             AlertDialog dialog = alertReset.create();
             dialog.show();
         });

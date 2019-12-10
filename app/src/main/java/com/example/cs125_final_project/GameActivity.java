@@ -134,9 +134,8 @@ public class GameActivity extends AppCompatActivity {
                     }
                     break;
             }
-
-
             updateCoins();
+
             updateLives(lives, txtLives);
             timer = new CountDownTimer(passFailTimerMillisLeft, 1000) {
                 @Override

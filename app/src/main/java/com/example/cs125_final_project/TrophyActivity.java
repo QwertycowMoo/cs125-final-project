@@ -34,9 +34,11 @@ public class TrophyActivity extends AppCompatActivity {
         trophy_back.setVisibility(VISIBLE);
         Button buy_trophy = findViewById(R.id.buy_trophy);
         buy_trophy.setVisibility(INVISIBLE);
+        // Data received from MainActivity
         trophies = getIntent().getBooleanArrayExtra("trophies");
         coins = getIntent().getIntExtra("coins", 0);
         updateCoins(coins);
+        // Return button
         trophy_back.setOnClickListener(v -> {
             trophy_back.setVisibility(INVISIBLE);
             // New intent used to send trophy array, coins back to main activity.
@@ -75,7 +77,7 @@ public class TrophyActivity extends AppCompatActivity {
         //__________________________________________________________________________________________
         ImageButton trophy_geoff = findViewById(R.id.trophy_geoff);
         boolean trophy0;
-        if (trophies[0] == true) {
+        if (trophies[0]) {
             trophy_geoff.setColorFilter(Color.TRANSPARENT);
             trophy0 = true;
         } else {
@@ -89,6 +91,7 @@ public class TrophyActivity extends AppCompatActivity {
             });
         } else {
             trophy_geoff.setOnClickListener(view -> {
+                buy_trophy.setVisibility(INVISIBLE);
                 if (coins >= COST[0]) {
                     buy_trophy.setVisibility(VISIBLE);
                     buy_trophy.setOnClickListener(v -> {
@@ -103,7 +106,7 @@ public class TrophyActivity extends AppCompatActivity {
 
         ImageButton trophy_daniel = findViewById(R.id.trophy_daniel);
         boolean trophy1;
-        if (trophies[1] == true) {
+        if (trophies[1]) {
             trophy_daniel.setColorFilter(Color.TRANSPARENT);
             trophy1 = true;
         } else {
@@ -117,6 +120,7 @@ public class TrophyActivity extends AppCompatActivity {
             });
         } else {
             trophy_daniel.setOnClickListener(view -> {
+                buy_trophy.setVisibility(INVISIBLE);
                 if (coins >= COST[1]) {
                     buy_trophy.setVisibility(VISIBLE);
                     buy_trophy.setOnClickListener(v -> {
@@ -131,7 +135,7 @@ public class TrophyActivity extends AppCompatActivity {
 
         ImageButton trophy_rima = findViewById(R.id.trophy_rima);
         boolean trophy2;
-        if (trophies[2] == true) {
+        if (trophies[2]) {
             trophy_rima.setColorFilter(Color.TRANSPARENT);
             trophy2 = true;
         } else {
@@ -145,6 +149,7 @@ public class TrophyActivity extends AppCompatActivity {
             });
         } else {
             trophy_rima.setOnClickListener(view -> {
+                buy_trophy.setVisibility(INVISIBLE);
                 if (coins >= COST[2]) {
                     buy_trophy.setVisibility(VISIBLE);
                     buy_trophy.setOnClickListener(v -> {
@@ -159,7 +164,7 @@ public class TrophyActivity extends AppCompatActivity {
 
         ImageButton trophy_ben = findViewById(R.id.trophy_ben);
         boolean trophy3;
-        if (trophies[3] == true) {
+        if (trophies[3]) {
             trophy_ben.setColorFilter(Color.TRANSPARENT);
             trophy3 = true;
         } else {
@@ -173,6 +178,7 @@ public class TrophyActivity extends AppCompatActivity {
             });
         } else {
             trophy_ben.setOnClickListener(view -> {
+                buy_trophy.setVisibility(INVISIBLE);
                 if (coins >= COST[3]) {
                     buy_trophy.setVisibility(VISIBLE);
                     buy_trophy.setOnClickListener(v -> {
@@ -187,7 +193,7 @@ public class TrophyActivity extends AppCompatActivity {
 
         ImageButton trophy_david = findViewById(R.id.trophy_david);
         boolean trophy4;
-        if (trophies[4] == true) {
+        if (trophies[4]) {
             trophy_david.setColorFilter(Color.TRANSPARENT);
             trophy4 = true;
         } else {
@@ -201,6 +207,7 @@ public class TrophyActivity extends AppCompatActivity {
             });
         } else {
             trophy_david.setOnClickListener(view -> {
+                buy_trophy.setVisibility(INVISIBLE);
                 if (coins >= COST[4]) {
                     buy_trophy.setVisibility(VISIBLE);
                     buy_trophy.setOnClickListener(v -> {
@@ -215,7 +222,7 @@ public class TrophyActivity extends AppCompatActivity {
 
         ImageButton trophy_evan = findViewById(R.id.trophy_evan);
         boolean trophy5;
-        if (trophies[5] == true) {
+        if (trophies[5]) {
             trophy_evan.setColorFilter(Color.TRANSPARENT);
             trophy5 = true;
         } else {
@@ -229,6 +236,7 @@ public class TrophyActivity extends AppCompatActivity {
             });
         } else {
             trophy_evan.setOnClickListener(view -> {
+                buy_trophy.setVisibility(INVISIBLE);
                 if (coins >= COST[5]) {
                     buy_trophy.setVisibility(VISIBLE);
                     buy_trophy.setOnClickListener(v -> {
@@ -243,7 +251,7 @@ public class TrophyActivity extends AppCompatActivity {
 
         ImageButton trophy_kevin = findViewById(R.id.trophy_kevin);
         boolean trophy6;
-        if (trophies[6] == true) {
+        if (trophies[6]) {
             trophy_kevin.setColorFilter(Color.TRANSPARENT);
             trophy6 = true;
         } else {
@@ -257,6 +265,7 @@ public class TrophyActivity extends AppCompatActivity {
             });
         } else {
             trophy_kevin.setOnClickListener(view -> {
+                buy_trophy.setVisibility(INVISIBLE);
                 if (coins >= COST[6]) {
                     buy_trophy.setVisibility(VISIBLE);
                     buy_trophy.setOnClickListener(v -> {
@@ -287,7 +296,7 @@ public class TrophyActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         buy_trophy.setVisibility(INVISIBLE);
                         trophies[i] = true;
-                        // Updates coins by subtracting the cost of the trophy,
+                        // subtracting the cost of the trophy,
                         // then recreates the current intent with updated extras.
                         coins -= COST[i];
                         getIntent().putExtra("coins", coins);
