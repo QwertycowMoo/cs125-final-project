@@ -19,16 +19,10 @@ import java.util.Map;
 import java.util.Random;
 
 
-public class QuestionsGame extends AppCompatActivity {
+public class QuestionsGame extends Game {
     /** map storing the questions and answers as well as the correct answer */
     private Map<String[], Integer> questionsAnswer;
     private List<String[]> questionKeys;
-
-
-    /**timer shtuff*/
-    private CountDownTimer timer;
-    private TextView txtTimer;
-    private long timeMillisLeft;
 
     /**question shtuff*/
     String[] questionKey;
@@ -111,54 +105,17 @@ public class QuestionsGame extends AppCompatActivity {
         }
     }
     private void playGame() {
-        timer = new CountDownTimer(timeMillisLeft, 1000) {
-            @Override
-            public void onTick(long l) {
-                timeMillisLeft = l;
-                updateTimer();
-            }
-
-            @Override
-            public void onFinish() {
-                endGame(RESULT_OK, false);
-            }
-        }.start();
-
-    }
-    private void updateTimer() {
-        int seconds = (int) timeMillisLeft / 1000;
-        txtTimer.setText("Time Left: " + seconds);
-    }
-
-    private void endGame(int endCode, boolean success) {
-        Intent intent = new Intent();
-        intent.putExtra("success", success);
-        setResult(endCode, intent);
-        layQuestions.setVisibility(View.GONE);
-        finish();
+       setupGame();
     }
 
     @Override
-    public void onBackPressed() {
-        timer.cancel();
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-        alertBuilder.setMessage("Do you really want to quit?")
-                .setTitle("Quitting?")
-                .setPositiveButton(R.string.finish_game, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        endGame(RESULT_CANCELED, false);
-                    }
-                })
-                .setNegativeButton(R.string.continue_game, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        timer.start();
-                    }
-                });
-
-        AlertDialog dialog = alertBuilder.create();
-        dialog.show();
+    public boolean checkGame() {
+        return false;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        layQuestions.setVisibility(View.GONE);
+    }
 }

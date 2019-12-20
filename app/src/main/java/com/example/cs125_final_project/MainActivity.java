@@ -10,6 +10,14 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 /** NOTE: Our new android feature for this app is a countdown timer located in GameActivity.java */
 
 
@@ -18,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private int coins = 0;
 
     /** Array of trophies earned as a boolean[] */
-    private boolean[] trophies = new boolean[7];
+    private int[] trophies;
 
+    private String trophyFile = "trophyInfo";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +38,40 @@ public class MainActivity extends AppCompatActivity {
         Button btnTrophy = findViewById(R.id.btnTrophyRoom);
         Button btnReset = findViewById(R.id.btnReset);
 
+        System.out.println("Started Again");
+
+        //Put trophies storage and file access here
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            FileInputStream fileReader = this.openFileInput(trophyFile);
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(fileReader, StandardCharsets.UTF_8);
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line = reader.readLine();
+            while (line != null) {
+                stringBuilder.append(line);
+                line = reader.readLine();
+            }
+            fileReader.close();
+
+        } catch (IOException e) {
+            //Make a dialog box saying that files were lost so you're restarting
+        } finally {
+            trophies = new int[7];
+            String gameInfo = stringBuilder.toString();
+            String[] gInfo = gameInfo.split(",");
+            if (gInfo[0] == "") {
+                coins = 0;
+            } else {
+                coins = Integer.parseInt(gInfo[0]);
+            }
+            updateCoins();
+            for (int i = 1; i < gInfo.length; i++) {
+                trophies[i - 1] = Integer.parseInt(gInfo[i]);
+                System.out.println(trophies[i - 1]);
+            }
+
+        }
         btnCredits.setOnClickListener(v -> {
             //coins = coins + 1021;
             Intent intentCredits = new Intent(this, CreditsActivity.class);
@@ -61,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             coins = 0;
                             updateCoins();
-                            trophies = new boolean[7];
+                            trophies = new int[7];
                         }
                     })
                     .setNegativeButton("Cancel Action", new DialogInterface.OnClickListener() {
@@ -84,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (resultCode == 2) {
             coins = data.getIntExtra("coinsToReturn", 0);
-            trophies = data.getBooleanArrayExtra("trophiesToReturn");
+            trophies = data.getIntArrayExtra("trophiesToReturn");
         }
         updateCoins();
     }
@@ -96,5 +139,29 @@ public class MainActivity extends AppCompatActivity {
         } else {
             coinText.setText(coins + " Challen Coins");
         }
+    }
+
+    @Override
+    protected void onStop() {
+        String fileInfo;
+        StringBuilder fBuilder = new StringBuilder();
+        fBuilder.append(coins).append(",");
+        for (int i = 0; i < trophies.length; i++) {
+            fBuilder.append(trophies[i]);
+            if (i != trophies.length - 1) {
+                fBuilder.append(",");
+            }
+        }
+        fileInfo = fBuilder.toString();
+        System.out.println(fileInfo);
+        try {
+            FileOutputStream fOutput = this.openFileOutput(trophyFile, this.MODE_PRIVATE);
+            fOutput.write(fileInfo.getBytes());
+            fOutput.close();
+        } catch (IOException e) {
+
+        }
+
+        super.onStop();
     }
 }

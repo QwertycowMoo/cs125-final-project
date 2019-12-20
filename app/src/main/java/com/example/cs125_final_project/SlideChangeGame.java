@@ -17,22 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.w3c.dom.Text;
 
 import java.util.Random;
-public class SlideChangeGame extends AppCompatActivity {
+public class SlideChangeGame extends Game {
     /**Array of all the slide images used to change/match */
     private int[] slideImages;
     /**Geoff's slide, the one to match: an index*/
     private int geoffSlide;
     /**Your current slide, change this to match Geoff's: an index*/
     private int currentSlide;
-    /**CountDown Timer */
-    private CountDownTimer timer;
-    /**Number of seconds for the timer*/
-    private long timeMillisLeft;
     /**They're global because it works that way*/
     private LinearLayout layChangeSlides;
     private ImageView imgYours;
     private ImageView imgGeoff;
-    private TextView txtTimer;
 
     public static final int SLIDE_CHANGE_GAME_END_CODE = 0;
 
@@ -86,18 +81,7 @@ public class SlideChangeGame extends AppCompatActivity {
 
 
     public void playGame() {
-        timer = new CountDownTimer(timeMillisLeft, 1000) {
-            @Override
-            public void onTick(long l) {
-                timeMillisLeft = l;
-                updateTimer();
-            }
-
-            @Override
-            public void onFinish() {
-                endGame(RESULT_OK);
-            }
-        }.start();
+        setupGame();
         //This needs to be declared in the OnCreate first then it can be used, maybe global variable?
         //Makes the layout appear so the player can see it
         //Starts Geoff's slide on a random slide and the player on a random slide
@@ -124,45 +108,18 @@ public class SlideChangeGame extends AppCompatActivity {
         });
     }
 
-    private void updateTimer() {
-        int seconds = (int) timeMillisLeft / 1000;
-        txtTimer.setText("Time Left: " + seconds);
-    }
-
-    private void endGame(int endCode) {
+    @Override
+    public boolean checkGame() {
         boolean success = false;
         if (currentSlide == geoffSlide) {
             success = true;
         }
-        Intent intent = new Intent();
-        intent.putExtra("success", success);
-        setResult(endCode, intent);
-        layChangeSlides.setVisibility(View.GONE);
-        finish();
+        return success;
     }
 
     @Override
-    public void onBackPressed() {
-        timer.cancel();
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-        alertBuilder.setMessage("Do you really want to quit?")
-                .setTitle("Quitting?")
-                .setPositiveButton(R.string.finish_game, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        endGame(RESULT_CANCELED);
-                    }
-                })
-                .setNegativeButton(R.string.continue_game, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        timer.start();
-                    }
-                });
-
-        AlertDialog dialog = alertBuilder.create();
-        dialog.show();
+    protected void onDestroy() {
+        super.onDestroy();
+        layChangeSlides.setVisibility(View.GONE);
     }
-
-
 }
