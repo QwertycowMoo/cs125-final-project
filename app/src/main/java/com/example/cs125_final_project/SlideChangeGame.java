@@ -64,7 +64,7 @@ public class SlideChangeGame extends AppCompatActivity {
         layChangeSlides.setVisibility(View.VISIBLE);
         //Timer Setup
         txtTimer = findViewById(R.id.txtTimer);
-        timeMillisLeft = 6000;
+        timeMillisLeft = 9000;
 
         //Updating coins and lives has to happen through intent or else it just breaks
         Intent intent = getIntent();

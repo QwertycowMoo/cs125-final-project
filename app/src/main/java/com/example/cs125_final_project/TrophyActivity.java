@@ -21,7 +21,7 @@ public class TrophyActivity extends AppCompatActivity {
     private boolean[] trophies;
 
     /** Array of ints storing the costs of certain trophies */
-    private final int[] COST = {500, 100, 150, 200, 50, 1, 20};
+    private final int[] COST = {25, 10, 15, 20, 5, 1, 20};
 
     /** Integer to hold the number of coins the user has. Will be passed back to MainActivity. */
     private int coins;
@@ -98,7 +98,7 @@ public class TrophyActivity extends AppCompatActivity {
                         buyTrophy(0);
                     });
                 }
-                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 500 Challen Coins.");
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 25 Challen Coins.");
             });
         }
 
@@ -127,7 +127,7 @@ public class TrophyActivity extends AppCompatActivity {
                         buyTrophy(1);
                     });
                 }
-                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 100 Challen Coins.");
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 10 Challen Coins.");
             });
         }
 
@@ -156,7 +156,7 @@ public class TrophyActivity extends AppCompatActivity {
                         buyTrophy(2);
                     });
                 }
-                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 150 Challen Coins.");
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 15 Challen Coins.");
             });
         }
 
@@ -185,7 +185,7 @@ public class TrophyActivity extends AppCompatActivity {
                         buyTrophy(3);
                     });
                 }
-                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 200 Challen Coins.");
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 20 Challen Coins.");
             });
         }
 
@@ -214,7 +214,7 @@ public class TrophyActivity extends AppCompatActivity {
                         buyTrophy(4);
                     });
                 }
-                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 50 Challen Coins.");
+                trophy_message.setText("* * * LOCKED: * * * \nUnlock with 5 Challen Coins.");
             });
         }
 

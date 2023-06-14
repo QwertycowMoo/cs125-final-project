@@ -91,7 +91,7 @@ public class SmashBugsGame extends AppCompatActivity{
         TextView txtGameTitle = findViewById(R.id.txtGameTitle);
         txtGameTitle.setText("Squash the Bugs in the Code!");
         //Timer and begin game
-        timeMillisLeft = 10000;
+        timeMillisLeft = 14000;
         playGame();
     }
 

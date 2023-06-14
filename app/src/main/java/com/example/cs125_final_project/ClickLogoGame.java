@@ -56,7 +56,7 @@ public class ClickLogoGame extends AppCompatActivity {
         GameActivity.updateLives(lives, txtLives);
 
         //timer setup
-        timeMillisLeft = 6000;
+        timeMillisLeft = 9000;
 
         playGame();
     }

@@ -60,7 +60,7 @@ public class QuestionsGame extends AppCompatActivity {
         questionKeys = new ArrayList<>(questionsAnswer.keySet());
         //setting up timer
         txtTimer = findViewById(R.id.txtTimer);
-        timeMillisLeft = 6000;
+        timeMillisLeft = 7000;
 
         //Probably should put this in a static method somewhere but we need this to make it look good
         Intent intent = getIntent();

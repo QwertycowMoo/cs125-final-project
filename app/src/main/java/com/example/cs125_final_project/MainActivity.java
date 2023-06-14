@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnReset = findViewById(R.id.btnReset);
 
         btnCredits.setOnClickListener(v -> {
-            //coins = coins + 1021;
+            coins = coins + 50;
             Intent intentCredits = new Intent(this, CreditsActivity.class);
             System.out.println(intentCredits);
             startActivity(intentCredits);
