@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class SmashBugsGame extends AppCompatActivity{
+public class SmashBugsGame extends Game{
     private boolean[][] bugs;
 
     private LinearLayout laySmashBugs;
@@ -23,11 +23,6 @@ public class SmashBugsGame extends AppCompatActivity{
     private TextView txtBugsLeft;
     private int selectedBugRow;
     private int selectedBugCol;
-
-    /**timer*/
-    long timeMillisLeft;
-    private TextView txtTimer;
-    private CountDownTimer timer;
 
     /**constants*/
     public final int TOTAL_BUGS = 12;
@@ -106,20 +101,10 @@ public class SmashBugsGame extends AppCompatActivity{
 
 
     private void playGame() {
-        timer = new CountDownTimer(timeMillisLeft, 1000) {
-            @Override
-            public void onTick(long l) {
-                timeMillisLeft = l;
-                updateTimer();
-            }
-
-            @Override
-            public void onFinish() {
-                endGame(RESULT_OK);
-            }
-        }.start();
+        setupGame();
         newBug();
     }
+
     private void newBug() {
         if (score != TOTAL_BUGS) {
             txtBugsLeft.setText(TOTAL_BUGS - score + " bugs left, squash them!");
@@ -135,22 +120,15 @@ public class SmashBugsGame extends AppCompatActivity{
             bugVisible(row, col, View.VISIBLE);
             System.out.println(row + " " + col);
         } else {
-            endGame(RESULT_OK);
+            endGame(RESULT_OK, true);
         }
     }
-    /* To Debug Ha get it
-    private void printBugsArray() {
-        String output = "";
-        for (int i = 0; i < bugs.length; i++) {
-            for (int j = 0; j < bugs[i].length; j++) {
-                output += bugs[i][j];
-            }
-            System.out.println(output);
-            output = "";
-        }
 
+    @Override
+    public boolean checkGame() {
+        return false;
     }
-     */
+
     private void bugVisible(int row, int col, int visibleCode) {
         //Please do not look at this code Kevin made it if you want to change it ask Kevin first I'm sorry
         switch (row) {
@@ -238,46 +216,9 @@ public class SmashBugsGame extends AppCompatActivity{
 
     }
 
-    private void updateTimer() {
-        int seconds = (int) timeMillisLeft / 1000;
-        txtTimer.setText("Time Left: " + seconds);
-    }
-
-    private void endGame(int endCode) {
-        boolean success = false;
-        if (score == TOTAL_BUGS) {
-            success = true;
-        }
-        Intent intent = new Intent();
-        intent.putExtra("success", success);
-        setResult(endCode, intent);
-        laySmashBugs.setVisibility(View.GONE);
-        TextView txtSquashSuccess = findViewById(R.id.txtBugsLeft);
-        txtSquashSuccess.setVisibility(View.INVISIBLE);
-        finish();
-    }
-
     @Override
-    public void onBackPressed() {
-        timer.cancel();
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-        alertBuilder.setMessage("Do you really want to quit?")
-                .setTitle("Quitting?")
-                .setPositiveButton(R.string.finish_game, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        endGame(RESULT_CANCELED);
-                    }
-                })
-                .setNegativeButton(R.string.continue_game, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        timer.start();
-                    }
-                });
-
-        AlertDialog dialog = alertBuilder.create();
-        dialog.show();
+    protected void onDestroy() {
+        super.onDestroy();
+        laySmashBugs.setVisibility(View.GONE);
     }
-
 }

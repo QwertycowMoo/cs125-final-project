@@ -14,18 +14,13 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class ClickLogoGame extends AppCompatActivity {
+public class ClickLogoGame extends Game {
     /**Click Counter */
      private int clickCount;
      /**Click Goal */
      private int clickGoal;
 
-    /**timer*/
-    private TextView txtTimer;
-    private CountDownTimer timer;
-    /**Number of seconds for the timer*/
-    private long timeMillisLeft;
-
+     private LinearLayout layClickLogo;
     public static final int CLICK_LOGO_GAME_END_CODE = 1;
 
     TextView txtLogoClickCount;
@@ -41,7 +36,7 @@ public class ClickLogoGame extends AppCompatActivity {
         TextView txtLives = findViewById(R.id.txtLives);
         TextView txtCoins = findViewById(R.id.txtCoins);
         //Show game
-        LinearLayout layClickLogo = findViewById(R.id.layClickCSLogo);
+        layClickLogo = findViewById(R.id.layClickCSLogo);
         layClickLogo.setVisibility(View.VISIBLE);
 
         //Game information setup
@@ -62,18 +57,7 @@ public class ClickLogoGame extends AppCompatActivity {
     }
 
     private void playGame() {
-        timer = new CountDownTimer(timeMillisLeft, 1000) {
-            @Override
-            public void onTick(long l) {
-                timeMillisLeft = l;
-                updateTimer();
-            }
-
-            @Override
-            public void onFinish() {
-                endGame(RESULT_OK);
-            }
-        }.start();
+        setupGame();
         ImageView imgLogoClick = findViewById(R.id.imgLogoClick);
         imgLogoClick.setOnClickListener(v -> {
             clickCount += 1;
@@ -83,45 +67,19 @@ public class ClickLogoGame extends AppCompatActivity {
             }
         });
     }
-    private void endGame(int endCode) {
-        Intent intent = new Intent();
-        if (clickCount == clickGoal) {
-            intent.putExtra("success", true);
-        } else {
-            intent.putExtra("success", false);
-        }
-        setResult(endCode, intent);
-        LinearLayout layClickLogo = findViewById(R.id.layClickCSLogo);
-        layClickLogo.setVisibility(View.GONE);
-        finish();
-    }
 
-    private void updateTimer() {
-        int seconds = (int) timeMillisLeft / 1000;
-        txtTimer.setText("Time Left: " + seconds);
+    @Override
+    public boolean checkGame() {
+        boolean success = false;
+        if (clickCount == clickGoal) {
+            success = true;
+        }
+        return success;
     }
 
     @Override
-    public void onBackPressed() {
-        timer.cancel();
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-        alertBuilder.setMessage("Do you really want to quit?")
-                .setTitle("Quitting?")
-                .setPositiveButton(R.string.finish_game, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        endGame(RESULT_CANCELED);
-                    }
-                })
-                .setNegativeButton(R.string.continue_game, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        timer.start();
-                    }
-                });
-
-        AlertDialog dialog = alertBuilder.create();
-        dialog.show();
+    protected void onDestroy() {
+        super.onDestroy();
+        layClickLogo.setVisibility(View.GONE);
     }
-
 }
